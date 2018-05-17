@@ -1,5 +1,6 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
     module: {
@@ -10,7 +11,7 @@ module.exports = {
                 use: { loader: 'babel-loader' }
             },
             {
-                test: /\.thml$/,
+                test: /\.html$/,
                 use: [
                     {
                         loader: 'html-loader',
@@ -33,5 +34,10 @@ module.exports = {
             filename: '[name].css',
             chunkFilename: '[id].css'
         }),
-    ]
+    ],
+    optimization: {
+        minimizer: [
+            new OptimizeCssAssetsPlugin({}),
+        ]
+    }
 };
